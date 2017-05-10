@@ -1,0 +1,7 @@
+{{yield}}
+
+<ul>
+{{#each (attributes-of value) as |key|}}
+  <li>{{key}}</li>
+{{/each}}
+</ul>

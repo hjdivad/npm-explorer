@@ -43,6 +43,7 @@
   "private": true,
   "dependencies": {
     "ember-one-way-controls": "^2.0.0",
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "ember-m3": "ssh://github.com/hjdivad/ember-m3"
   }
 }
