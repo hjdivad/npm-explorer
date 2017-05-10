@@ -3,7 +3,7 @@
 
   {{#if package.license}}
     <span class='subtitle'>
-      (package.license)
+      ({{package.license}})
     </span>
   {{/if}}
 </h2>
@@ -19,8 +19,10 @@
 <a href="{{package.homepage}}"> homepage </a><br>
 {{/if}}
 
-{{#if package.repository}}
-TODO: repolink
+{{#if githubURL}}
+<a href='{{githubURL}}'>
+  {{githubRepoName}}
+</a>
 {{/if}}
 
 {{#if package.readmeFilename}}

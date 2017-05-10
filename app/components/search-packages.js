@@ -5,7 +5,6 @@ export default Ember.Component.extend({
 
   actions: {
     updatePackageName(packageName) {
-      console.log('wat');
       this.set('value', packageName);
     },
   }

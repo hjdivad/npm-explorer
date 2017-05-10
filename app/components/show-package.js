@@ -23,6 +23,24 @@ export default Ember.Component.extend({
     return Object.keys(this.get('package.versions')).sort().reverse();
   }),
 
+  githubURL: computed('package.repository.url', function githubURL() {
+    let repoURL = this.get('package.repository.url');
+    if (!/https?:\/\/github.com/.test(repoURL)) {
+      return;
+    }
+
+    return repoURL.replace(/^git\+/, '').replace(/\.git$/, '')
+  }),
+
+  githubRepoName: computed('package.repository.url', function githubRepoName() {
+    let repoURL = this.get('package.repository.url');
+    if (!/https?:\/\/github.com/.test(repoURL)) {
+      return;
+    }
+
+    return repoURL.replace(/^(git\+)?https?:\/\/github.com\//, '').replace(/\.git$/, '')
+  }),
+
   actions: {
     toggleVersion(versionNumber) {
       let expandedVersions = this.expandedVersions.slice();
@@ -34,7 +52,6 @@ export default Ember.Component.extend({
         expandedVersions.push(versionNumber);
       }
 
-      console.log('expandedVersions', expandedVersions);
       this.set('expandedVersions', expandedVersions);
     },
   }
