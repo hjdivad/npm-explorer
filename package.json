@@ -42,6 +42,7 @@
   },
   "private": true,
   "dependencies": {
-    "ember-one-way-controls": "^2.0.0"
+    "ember-one-way-controls": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1"
   }
 }
