@@ -1,0 +1,87 @@
+<h2>
+  {{package.name}}
+
+  {{#if package.license}}
+    <span class='subtitle'>
+      (package.license)
+    </span>
+  {{/if}}
+</h2>
+
+{{#if package.description}}
+<section>
+  {{package.description}}
+</section>
+{{/if}}
+
+
+{{#if package.homepage}}
+<a href="{{package.homepage}}"> homepage </a><br>
+{{/if}}
+
+{{#if package.repository}}
+TODO: repolink
+{{/if}}
+
+{{#if package.readmeFilename}}
+<section>
+  <h3>{{package.readmeFilename}}</h3>
+</section>
+{{/if}}
+
+<section>
+  <h3>Maintainers</h3>
+  <ul>
+    {{#each package.maintainers as |maintainer|}}
+    <li>{{maintainer.name}} &lt;{{maintainer.email}}&gt;</li>
+    {{/each}}
+  </ul>
+</section>
+
+<section>
+  <h3>Versions</h3>
+  <ul>
+    {{#each sortedVersionNumbers as |versionNumber|}}
+    <li>
+      <a href='javascript:' {{action 'toggleVersion' versionNumber}}>
+        {{versionNumber}}
+      </a>
+
+      {{#if (array-includes expandedVersions versionNumber)}}
+        {{#with (get-property package.versions versionNumber) as |version|}}
+          <section class='package-version'>
+            SHA: {{version.dist.shasum}}
+
+            {{#if (length-of (keys-for version.dependencies))}}
+            <h4>Dependencies</h4>
+            <ul>
+              {{#each-in version.dependencies as |depName depVersion|}}
+              <li>
+                {{#link-to 'package' depName}}
+                  {{depName}}@{{depVersion}}
+                {{/link-to}}
+              </li>
+              {{/each-in}}
+            </ul>
+            {{/if}}
+
+            {{#if (length-of (keys-for version.devDependencies))}}
+            <h4>Dev Dependencies</h4>
+            <ul>
+              {{#each-in version.devDependencies as |depName depVersion|}}
+              <li>
+                {{#link-to 'package' depName}}
+                  {{depName}}@{{depVersion}}
+                {{/link-to}}
+              </li>
+              {{/each-in}}
+            </ul>
+            {{/if}}
+
+          </section>
+        {{/with}}
+      {{/if}}
+    </li>
+    {{/each}}
+  </ul>
+</section>
