@@ -1,13 +1,15 @@
 import Ember from 'ember';
 
-export function keysOf([model]/*, hash*/) {
+const { get } = Ember;
+
+export function attributesOf([model]/*, hash*/) {
   if (!model) {
-    return [];
+    return {};
   }
 
-  let attrs = [];
-  model.eachAttribute(a => attrs.push(a));
+  let attrs = {};
+  model.eachAttribute(a => attrs[a] = get(model, a));
   return attrs;
 }
 
-export default Ember.Helper.helper(keysOf);
+export default Ember.Helper.helper(attributesOf);
