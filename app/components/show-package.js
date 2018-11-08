@@ -2,8 +2,6 @@ import Ember from 'ember';
 
 const { computed } = Ember;
 
-let id = 0;
-
 export default Ember.Component.extend({
   // ----------------------------------------------------------------------
   // API
